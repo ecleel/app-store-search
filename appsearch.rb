@@ -39,7 +39,12 @@ post '/search' do
     end
   end
   
+  files.map! {|file| file.gsub('tmp/', 'file/') }
   files.to_json
+end
+
+get '/file/*' do |file|
+  send_file "tmp/" + file
 end
 
 __END__
