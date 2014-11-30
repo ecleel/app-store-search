@@ -17,7 +17,7 @@ post '/search' do
   
   puts query
 
-  itunes  = ITunesSearchAPI.search term: query, limit: 10, media: 'software', entity: 'software'
+  itunes  = ITunesSearchAPI.search term: query, limit: 200, media: 'software', entity: 'software'
   play    = MarketBot::Android::SearchQuery.new(query).update.results
 
   market_names = %w(itunes play)
