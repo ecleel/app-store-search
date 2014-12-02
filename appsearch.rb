@@ -9,7 +9,7 @@ require 'market_bot'
 enable :inline_templates
 
 get '/' do
-  erb :index
+  send_file File.join(settings.public_folder, 'index.html')
 end
 
 post '/search' do
@@ -46,47 +46,3 @@ end
 get '/file/*' do |file|
   send_file "tmp/" + file
 end
-
-__END__
-@@ index
-<html>
-<head>
-  <title>Search IPhone and Andriod Apps</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script>
-  $(function() {
-    
-    $('#submit').click(function(){
-      $.post('/search',
-             {query: $('#query').val()},
-             function(data){
-               ary = JSON.parse(data);
-               console.log(ary);
-               console.log(ary[0])
-                $('#result a:first').attr('href', ary[0]);
-                $('#result a:last').attr('href', ary[1]);
-      
-                $('#result').show();
-              }
-            );
-    });
-  });
-  </script>
-</head>
-<h1>Search Apps</h1>
-<form action="/search" method="post" id="search">
-  <input type="text" name="query" id='query'>
-  <!-- <input type="submit"> -->
-  <input type="button" id='submit' value='Submit'>
-</form>
-<div id='result' style="display:none;">
-  <a href='javascript:void(0);'>
-    <img src='images/csv_text.png' /><br/>
-    Itunes
-  </a>
-  <a href='javascript:void(0);'>
-    <img src='images/csv_text.png' /><br/>
-    Play
-  </a>
-</div>
-</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>Search IPhone and Andriod Apps</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/sticky.css">
+    <link rel="stylesheet" href="stylesheets/ladda-themeless.min.css">
+  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="javascripts/spin.min.js"></script>
+    <script src="javascripts/ladda.min.js"></script>
+    <script>
+      $(function() {
+    
+        $('#submit').click(function(){
+          var l = Ladda.create(this);
+      	 	l.start();
+          $.post('/search',
+                 {query: $('#query').val()},
+                 function(data){
+                   ary = JSON.parse(data);
+                   console.log(ary);
+                   console.log(ary[0])
+                    $('#result a:first').attr('href', ary[0]);
+                    $('#result a:last').attr('href', ary[1]);
+      
+                    $('.lead').hide();
+                    $('#result').show();
+                  }
+                ).always(function(){ l.stop(); });
+        });
+      });
+    </script>
+
+  </head>
+  <body>
+    
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Search Apps</h1>
+
+        <div class="input-group">
+
+          <input type="text" name="query" id='query' class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-primary ladda-button" type="button" id='submit' data-style="expand-right">
+               Search
+            </button>
+          </span>
+
+        </div>
+
+      </div>
+      <div id='result' style="display:none;">
+        <a href='javascript:void(0);'>
+          <img src='images/csv_text.png' /><br/>
+          Itunes
+        </a>
+        <a href='javascript:void(0);'>
+          <img src='images/csv_text.png' /><br/>
+          Play
+        </a>
+      </div>
+      <p class="lead">Search for keywords in App Store and Google Play and return a list of apps in CSV file for each store.</p>
+      <p>it take a while to retrive the data. How about playing <a href="http://patorjk.com/games/snake/">a snake game</a> while you waiting ;)</p>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Developed by <a href="https://twitter.com/ecleel">@ecleel</a> and you could find the code in github <a href="https://github.com/ecleel/app-store-search">app-store-search</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
