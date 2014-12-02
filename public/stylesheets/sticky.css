@@ -30,3 +30,16 @@ body {
 .container .text-muted {
   margin: 20px 0;
 }
+
+.csv-link {
+  padding: 10px;
+  display:inline-block;
+  text-align: center;
+  font-weight: 700;
+}
+
+#result {
+  margin-left: auto;
+   margin-right: auto;
+   width: 23%;
+}

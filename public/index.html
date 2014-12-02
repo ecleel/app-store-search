@@ -30,11 +30,11 @@
                    console.log(ary[0])
                     $('#result a:first').attr('href', ary[0]);
                     $('#result a:last').attr('href', ary[1]);
-      
-                    $('.lead').hide();
+
                     $('#result').show();
                   }
-                ).always(function(){ l.stop(); });
+                ).fail(function(){ console.log("Somthing wrong happen" ); })
+                 .always(function(){ l.stop(); });
         });
       });
     </script>
@@ -59,18 +59,20 @@
         </div>
 
       </div>
-      <div id='result' style="display:none;">
-        <a href='javascript:void(0);'>
-          <img src='images/csv_text.png' /><br/>
-          Itunes
+
+      <div id='result' style='display:none;' >
+        <a href='javascript:void(0);' class='csv-link'>
+          <img src='images/csv_text.png' />
+          <div>Itunes</div>
         </a>
-        <a href='javascript:void(0);'>
-          <img src='images/csv_text.png' /><br/>
-          Play
+        <a href='javascript:void(0);' class='csv-link'>
+          <img src='images/csv_text.png' />
+          <div>Play</div>
         </a>
       </div>
+
       <p class="lead">Search for keywords in App Store and Google Play and return a list of apps in CSV file for each store.</p>
-      <p>it take a while to retrive the data. How about playing <a href="http://patorjk.com/games/snake/">a snake game</a> while you waiting ;)</p>
+      <p>It take a while to retrive the data. How about playing <a href="http://patorjk.com/games/snake/">a snake game</a> while you waiting ;)</p>
     </div>
 
     <footer class="footer">
@@ -78,5 +80,6 @@
         <p class="text-muted">Developed by <a href="https://twitter.com/ecleel">@ecleel</a> and you could find the code in github <a href="https://github.com/ecleel/app-store-search">app-store-search</a></p>
       </div>
     </footer>
+
   </body>
 </html>
