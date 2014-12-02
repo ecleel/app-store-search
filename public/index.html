@@ -18,8 +18,10 @@
     <script src="javascripts/ladda.min.js"></script>
     <script>
       $(function() {
+        submit_btn = $('#submit');
+        search_btn = function(){ submit_btn.removeClass('btn-danger').addClass('btn-primary').html('Search') }
     
-        $('#submit').click(function(){
+        submit_btn.click(function(){
           var l = Ladda.create(this);
       	 	l.start();
           $.post('/search',
@@ -33,7 +35,10 @@
 
                     $('#result').show();
                   }
-                ).fail(function(){ console.log("Somthing wrong happen" ); })
+                ).fail(function(){ 
+                  submit_btn.removeClass('btn-primary').addClass('btn-danger').html('Error happend in the server!');
+                  setTimeout(search_btn, 3000); // return search button after n seconds                  
+                })
                  .always(function(){ l.stop(); });
         });
       });
