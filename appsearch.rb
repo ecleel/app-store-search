@@ -14,8 +14,6 @@ end
 
 post '/search' do
   query = request[:query]
-  
-  puts query
 
   itunes  = ITunesSearchAPI.search term: query, limit: 200, media: 'software', entity: 'software'
   play    = MarketBot::Android::SearchQuery.new(query).update.results
@@ -24,8 +22,6 @@ post '/search' do
   unix_time = Time.now.to_i
   
   files = market_names.map { |mn| "tmp/#{query}_#{mn}_#{unix_time}.csv" }
-  
-  puts files
   
   [itunes, play].each_with_index do |store_results, idx|
     CSV.open(files[idx], "w") do |csv|
