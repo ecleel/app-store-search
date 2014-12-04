@@ -1,12 +1,10 @@
-require 'sinatra'
-
 require 'csv'
 require 'json'
 
+require 'sinatra'
+
 require 'itunes-search-api'
 require 'market_bot'
-
-enable :inline_templates
 
 get '/' do
   send_file File.join(settings.public_folder, 'index.html')
